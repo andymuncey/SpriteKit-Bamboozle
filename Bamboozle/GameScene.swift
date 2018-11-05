@@ -12,7 +12,7 @@ class GameScene: SKScene {
         super.init(size: size)
     }
     
-    private var rightAnswer : SKLabelNode!
+    private var rightAnswerLabel : SKLabelNode!
     
     override func didMove(to view: SKView) {
         
@@ -23,10 +23,10 @@ class GameScene: SKScene {
         backgroundColor = SKColor.black
         
         //create a label node for the question
-        let question = SKLabelNode(text: q?.question)
-        question.fontName = "Menlo"
-        question.position = CGPoint(x:frame.midX, y:frame.maxY-65)
-        addChild(question)
+        let questionLabel = SKLabelNode(text: q?.question)
+        questionLabel.fontName = "Menlo"
+        questionLabel.position = CGPoint(x:frame.midX, y:frame.maxY-65)
+        addChild(questionLabel)
         
         let colours = [SKColor.red, SKColor.yellow, SKColor.green, SKColor.blue]
         
@@ -50,7 +50,7 @@ class GameScene: SKScene {
             addChild(answerLabel)
             
             if q.correctIndex == index {
-                rightAnswer = answerLabel
+                rightAnswerLabel = answerLabel
             }
         }
     }
@@ -60,7 +60,7 @@ class GameScene: SKScene {
         
         let touchLocation = touch.location(in: self)
         
-        if  rightAnswer.contains(touchLocation){
+        if  rightAnswerLabel.contains(touchLocation){
             if QuestionManager.shared.hasNextQuestion() {
                 let nextQ = QuestionManager.shared.nextQuestion()!
                 goToSceneWithQuestion(q: nextQ)
